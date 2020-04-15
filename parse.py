@@ -2,7 +2,11 @@
 import wget
 from pathlib import Path
 import urllib
-
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("url")
+parser.add_argument("link_filter")
+args = parser.parse_args()
 
 with open("./htmlpdflinks.txt") as f:
     content = f.readlines()
