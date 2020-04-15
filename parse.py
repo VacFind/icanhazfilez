@@ -29,5 +29,5 @@ for line in content:
             print(line + " failed with HTTP error")
             print(e)
     else:
-        print(name_from_path + ": file exists")
+        print(name_from_path + ": file already exists on disk")
         
