@@ -1,37 +1,57 @@
 #parse.py
 import wget
 from pathlib import Path
-import urllib
+import requests
 import argparse
+from bs4 import BeautifulSoup, SoupStrainer
+
 parser = argparse.ArgumentParser()
 parser.add_argument("url")
 parser.add_argument("link_filter")
+#dry run
+
 args = parser.parse_args()
 
-with open("./htmlpdflinks.txt") as f:
-    content = f.readlines()
+#get HTML page
+page = requests.get(args.url)
 
-# strip trailig newlines
-content = [x.strip() for x in content]
+only_a_tags = SoupStrainer("a")
 
-for line in content:
-    #parts = line.split(" ", 1) #split on first space
-    #parts[0] = filename
-    #parts[1] = link
-    
-    name_from_path = line.split("/")[-1]
-    
+#check if downloading page was successful
+soup = BeautifulSoup(page.text, "html.parser", parse_only=only_a_tags)
 
-    my_file = Path(name_from_path)
-    if not my_file.is_file():
-        # file exists
-            
+
+links = []
+
+def get_base_url(url):
+    last_slash = url.rfind('/')
+    return url[:last_slash + 1]
+
+def is_relative_link(link):
+    return not link.startswith(("/", "http", "www"))
+
+#strip ./ from the front etc
+# def cleanup_link():
+
+
+base_url = get_base_url(args.url)
+print(base_url)
+
+#parse and filter links
+for a in soup.find_all('a', href=True):
+    if a['href'].endswith(args.link_filter):
+        links.append(base_url + a['href'])
+
+print(links)
+
+for link in links:
+    file_name = link.split("/")[-1]
+
+    if not Path(file_name).is_file():
         try:
-            
-            wget.download("http://www.frankshospitalworkshop.com/equipment/" + line)
-        except urllib.error.HTTPError as e:
-            print(line + " failed with HTTP error")
+            wget.download(link)
+        except Exception as e:
+            print(link + ": failed with error")
             print(e)
     else:
-        print(name_from_path + ": file already exists on disk")
-        
+        print(file_name + ": file already exists on disk")

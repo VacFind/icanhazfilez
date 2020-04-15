@@ -9,6 +9,7 @@ verify_ssl = true
 argparse = "*"
 requests = "*"
 bs4 = "*"
+wget = "*"
 
 [requires]
 python_version = "3.6"
