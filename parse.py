@@ -5,6 +5,7 @@ import requests
 import argparse
 from bs4 import BeautifulSoup, SoupStrainer
 from urllib.parse import urlparse
+import http.cookiejar 
 
 parser = argparse.ArgumentParser()
 #dry run
@@ -48,6 +49,12 @@ for a in soup.find_all('a', href=True):
             links.append(a['href'])
 
 print(links)
+
+cj = None
+if args.cookiefile is not None:
+    cj = http.cookiejar.MozillaCookieJar(args.cookiefile)
+    cj.load()
+
 
 for link in links:
     file_name = link.split("/")[-1]
