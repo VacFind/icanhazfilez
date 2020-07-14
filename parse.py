@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser()
 #dry run
 parser.add_argument("url", help='The URL to search for links')
 parser.add_argument("link_filter", help='the file extension for the files you are looking for')
+parser.add_argument("--cookiefile", type=str, help='the path to a text file containing cookies to use')
 
 args = parser.parse_args()
 
