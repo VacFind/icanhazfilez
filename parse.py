@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup, SoupStrainer
 from urllib.parse import urlparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("url")
-parser.add_argument("link_filter")
 #dry run
+parser.add_argument("url", help='The URL to search for links')
+parser.add_argument("link_filter", help='the file extension for the files you are looking for')
 
 args = parser.parse_args()
 
