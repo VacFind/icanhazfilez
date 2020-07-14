@@ -27,8 +27,8 @@ def get_base_url(url):
     last_slash = url.rfind('/')
     return url[:last_slash + 1]
 
-def is_relative_link(link):
-    return not link.startswith(("/", "http", "www"))
+def is_external_link(link):
+    return not link.startswith(("http", "www"))
 
 #strip ./ from the front etc
 # def cleanup_link():
