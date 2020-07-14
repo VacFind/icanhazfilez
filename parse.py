@@ -7,6 +7,7 @@ import logging
 from bs4 import BeautifulSoup, SoupStrainer
 from urllib.parse import urlparse
 import http.cookiejar 
+from handlers import binary_downloader
 
 parser = argparse.ArgumentParser()
 #dry run
@@ -62,13 +63,10 @@ if args.cookiefile is not None:
 
 
 for link in links:
-    file_name = link.split("/")[-1]
 
-    if not Path(file_name).is_file():
-        try:
-            wget.download(link)
-        except Exception as e:
-            logger.error("%s: failed with error", filename)
-            logger.error(e)
-    else:
-        logger.warning('%s: file already exists on disk', filename)
+    r= requests.get(link, cookies=cj, stream = True)
+    try:
+        binary_downloader(r, link)
+    except KeyError:
+        print("KeyError")
+        continue
