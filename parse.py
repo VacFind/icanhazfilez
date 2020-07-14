@@ -3,6 +3,7 @@ import wget
 from pathlib import Path
 import requests
 import argparse
+import logging
 from bs4 import BeautifulSoup, SoupStrainer
 from urllib.parse import urlparse
 import http.cookiejar 
@@ -16,6 +17,8 @@ parser.add_argument("-v", "--verbose", action='store_true', help='output more in
 
 
 args = parser.parse_args()
+
+logger = logging.getLogger(__name__)
 
 #get HTML page
 page = requests.get(args.url)
@@ -40,7 +43,7 @@ def is_external_link(link):
 
 
 base_url = get_base_url(args.url)
-print(base_url)
+logger.debug('base url: %s', base_url)
 
 #parse and filter links
 for a in soup.find_all('a', href=True):
@@ -50,7 +53,7 @@ for a in soup.find_all('a', href=True):
         else:
             links.append(a['href'])
 
-print(links)
+logger.debug('links: %s', links)
 
 cj = None
 if args.cookiefile is not None:
@@ -65,7 +68,7 @@ for link in links:
         try:
             wget.download(link)
         except Exception as e:
-            print(link + ": failed with error")
-            print(e)
+            logger.error("%s: failed with error", filename)
+            logger.error(e)
     else:
-        print(file_name + ": file already exists on disk")
+        logger.warning('%s: file already exists on disk', filename)
