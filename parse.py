@@ -4,6 +4,7 @@ from pathlib import Path
 import requests
 import argparse
 from bs4 import BeautifulSoup, SoupStrainer
+from urllib.parse import urlparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("url")
@@ -39,8 +40,11 @@ print(base_url)
 
 #parse and filter links
 for a in soup.find_all('a', href=True):
-    if a['href'].endswith(args.link_filter):
-        links.append(base_url + a['href'])
+    if urlparse(a['href']).path.endswith(args.link_filter):
+        if is_external_link(a['href']):
+            links.append(base_url + a['href'])
+        else:
+            links.append(a['href'])
 
 print(links)
 
