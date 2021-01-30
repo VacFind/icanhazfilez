@@ -15,6 +15,7 @@ cookielib = "*"
 http = "*"
 re = "*"
 pypdf = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.6"
