@@ -10,11 +10,11 @@ import http.cookiejar
 from handlers import binary_downloader
 
 parser = argparse.ArgumentParser()
-#dry run
 parser.add_argument("url", help='The URL to search for links')
 parser.add_argument("link_filter", help='the file extension for the files you are looking for')
 parser.add_argument("--cookiefile", type=str, help='the path to a text file containing cookies to use')
 parser.add_argument("-v", "--verbose", action='store_true', help='output more information')
+parser.add_argument("-n", "--dry-run", action='store_true', help='run the program without actually making any web requests')
 
 
 args = parser.parse_args()
