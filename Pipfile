@@ -10,6 +10,11 @@ argparse = "*"
 requests = "*"
 bs4 = "*"
 wget = "*"
+urllib = "*"
+cookielib = "*"
+http = "*"
+re = "*"
+pypdf = "*"
 
 [requires]
 python_version = "3.6"
