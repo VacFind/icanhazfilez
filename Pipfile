@@ -10,8 +10,6 @@ argparse = "~=1.4.0"
 requests = "~=2.23.0"
 bs4 = "~=0.0.1"
 wget = "~=3.2"
-urllib = "*"
-http = "*"
 sqlalchemy = "*"
 regex = "*"
 
