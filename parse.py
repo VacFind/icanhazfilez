@@ -1,5 +1,4 @@
 #parse.py
-import wget
 from pathlib import Path
 import requests
 import argparse

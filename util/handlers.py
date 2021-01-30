@@ -10,7 +10,10 @@ def text_handler(request, link):
 
     if not Path(file_name).is_file():
         try:
-            wget.download(link)
+            #https://stackoverflow.com/a/52251488
+            request.raise_for_status() # ensure we notice bad responses
+            with open(file_name, 'wb') as f:
+                file.write(request.text)
         except Exception as e:
             print(link + ": failed with error")
             print(e)
