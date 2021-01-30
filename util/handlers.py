@@ -1,7 +1,7 @@
 import requests, logging
 from pathlib import Path
 import regex, os
-from helpers import get_filename_from_url
+from util.helpers import get_filename_from_url
 
 logger = logging.getLogger(__name__)
 
