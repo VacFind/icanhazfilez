@@ -1,6 +1,6 @@
 import requests, logging
 from pathlib import Path
-import re, os
+import regex, os
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +26,8 @@ def binary_downloader(request, link):
     d = request.headers['Content-Disposition']
     logger.debug('Content-Disposition header: %s', d)
 
-    filename = re.findall("filename\*=utf-8''(.+)", d)[0]
+    #the old re package was deprecated, this should be compatable but i havent checked.  see https://pypi.org/project/regex/
+    filename = regex.findall("filename\*=utf-8''(.+)", d)[0]
     logger.debug('parsed filename: %s', filename)
     # except KeyError:
         # print("KeyError")

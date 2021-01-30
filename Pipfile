@@ -12,9 +12,9 @@ bs4 = "~=0.0.1"
 wget = "~=3.2"
 urllib = "*"
 http = "*"
-re = "*"
 pypdf = "*"
 sqlalchemy = "*"
+regex = "*"
 
 [requires]
 python_version = "3.6"
