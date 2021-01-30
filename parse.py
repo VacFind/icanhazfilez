@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup, SoupStrainer
 from urllib.parse import urlparse
 import http.cookiejar 
 import re, os
-from handlers import binary_downloader
+from util.handlers import binary_downloader
 
 parser = argparse.ArgumentParser()
 parser.add_argument("url", help='The URL to search for links')
