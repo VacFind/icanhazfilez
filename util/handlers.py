@@ -1,11 +1,12 @@
 import requests, logging
 from pathlib import Path
 import regex, os
+from helpers import get_filename_from_url
 
 logger = logging.getLogger(__name__)
 
 def text_handler(request, link):
-    file_name = link.split("/")[-1]
+    file_name = get_filename_from_url(link)
 
     if not Path(file_name).is_file():
         try:
@@ -17,7 +18,7 @@ def text_handler(request, link):
         print(file_name + ": file already exists on disk")
 
 def binary_downloader(request, link):
-    rawfilename = link[link.rfind('/')+1:]
+    rawfilename = get_filename_from_url(link)
     logger.debug('raw filename: %s', rawfilename)
     filename = ""
 
