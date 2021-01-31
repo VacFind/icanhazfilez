@@ -35,12 +35,14 @@ The available commands are:
 		parser = argparse.ArgumentParser(
 			description='Add a new data source to the database')
 		# NOT prefixing the argument with -- means it's not optional
-		parser.add_argument('url')
+		parser.add_argument('url', help="a consistent url to add to the list of sources")
+		parser.add_argument('--selector', help="the selector on the page to look for if the page contains a link that changes frequently", default=None, type=str)
+		parser.add_argument('--description', help="a description for this data source to help identiify what data it provides .etc", default=None, type=str)
 		# now that we're inside a subcommand, ignore the first
 		# TWO argvs, ie the command and the subcommand
 		args = parser.parse_args(sys.argv[2:])
 
-		new_source = Source(source_url=args.url)
+		new_source = Source(source_url=args.url, page_selector=args.selector, is_active=True, description=args.description)
 		session.add(new_source)
 		session.commit()
 
