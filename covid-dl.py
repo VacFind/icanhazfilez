@@ -42,7 +42,7 @@ The available commands are:
 		# TWO argvs, ie the command and the subcommand
 		args = parser.parse_args(sys.argv[2:])
 
-		new_source = Source(source_url=args.url, page_selector=args.selector, is_active=True, description=args.description)
+		new_source = Source(source_url=args.url, page_selector=args.selector, update_frequency=60, description=args.description)
 		session.add(new_source)
 		session.commit()
 
