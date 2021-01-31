@@ -1,11 +1,8 @@
 # it downloads files i guess
 
-script i wrote to quickly download all the pdf's from a public web page to the current directory instead of manually clicking each of them. should work for other stuff too though as long as its all the same kind of file
+A small commection of web-scraping scripts.
 
-not a lot of documentation cuz i threw it together pretty quickly and dont plan on maintaining it.
+`parse.py` quickly downloads all the files's from a  list of links to the current directory making it easier to download many files instead ofclicking each of them. Usage: `python3 parse.py [url to parse] [file extention of files to download]`
 
-
-## usage
-
-`python3 parse.py [url to parse] [file extention of files to download]`
+`covid-dl.py` A script for maintaining and scraping a list of sources related to the coronavirus pandemic. see help text in argparse for more info on the commands and format
 
