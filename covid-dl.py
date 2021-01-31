@@ -56,6 +56,27 @@ The available commands are:
 		parser.add_argument('--verbose', '-v', action='store_true')
 		args = parser.parse_args(sys.argv[2:])
 
+def should_download_source(source, current_datetime):
+	# Dates increase as time advances, thus, a descending ordering puts the most recent dates first.
+	last_record = session.query(RawData).filter(RawData.source_id == source.id).order_by(RawData.date_created.desc()).first()
+
+	#if source is disabled, dont download it
+	if source.update_frequency == 0:
+		return False
+
+	# if this source hasnt been downloaded yet, download it
+	if last_record == None:
+		return True
+
+	#if we are still within the update_frequency window, skip this update
+	update_window = datetime.timedelta(minutes=source.update_frequency)
+	if source.last_checked + update_window > current_datetime:
+		return False
+
+	#check if source has changed since last download
+	# headers available:
+	# last-modified: Fri, 29 Jan 2021 17:08:40 GMT
+	# content-length: 17101
 
 if __name__ == '__main__':
     CovidDL()
