@@ -77,6 +77,13 @@ def should_download_source(source, current_datetime):
 	# headers available:
 	# last-modified: Fri, 29 Jan 2021 17:08:40 GMT
 	# content-length: 17101
+		
+def get_source_file_info(source):
+	# HEAD request the file and look at content-disposition
+
+
+def get_source_file(source):
+	raise NotImplementedError()
 
 if __name__ == '__main__':
     CovidDL()
