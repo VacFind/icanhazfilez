@@ -1,6 +1,6 @@
 # Project Goal
 
-The goal of this repo is to automate the process of scraping spreadsheets and other file-based vaccination distribution data that states and counties make available pulicly.
+The goal of this repo is to automate the process of scraping spreadsheets and other file-based vaccination distribution data that states and counties make available pulicly. I imagine this would act similarly to apps like visualping.io that watch a page for changes, but it watches for a new data dump about covid vaccines and saves it.
 
 The app should work something like this:
 1. a new data source is added to the database
